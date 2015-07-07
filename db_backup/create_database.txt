@@ -1,0 +1,74 @@
+CREATE  TABLE `iaedb`.`incomeReason` (
+  `incomeReason_id` VARCHAR(200) NOT NULL ,
+  `incomeReason_title` VARCHAR(1000) NOT NULL ,
+  PRIMARY KEY (`incomeReason_id`) );
+
+CREATE  TABLE `iaedb`.`expenditureReason` (
+  `expenditureReason_id` VARCHAR(200) NOT NULL ,
+  `expenditureReason_title` VARCHAR(1000) NOT NULL ,
+  PRIMARY KEY (`expenditureReason_id`) );
+
+CREATE  TABLE `iaedb`.`donator` (
+  `donator_id` VARCHAR(200) NOT NULL ,
+  `donator_name` VARCHAR(100) NOT NULL ,
+  `donator_address` VARCHAR(500) NULL ,
+  `donator_phone` VARCHAR(20) NULL ,
+  PRIMARY KEY (`donator_id`) );
+
+CREATE  TABLE `iaedb`.`responsible` (
+  `responsible_id` VARCHAR(200) NOT NULL ,
+  `responsible_name` VARCHAR(100) NOT NULL ,
+  PRIMARY KEY (`responsible_id`) );
+
+CREATE  TABLE `iaedb`.`income` (
+  `income_id` VARCHAR(200) NOT NULL ,
+  `donator_id` VARCHAR(200) NULL ,
+  `incomeReason_id` VARCHAR(200) NULL ,
+  `responsible_id` VARCHAR(200) NULL ,
+  `income_date` DATE NULL ,
+  `income_amount` DECIMAL(20,2) ,
+  PRIMARY KEY (`income_id`) ,
+  INDEX `donator_id` (`donator_id` ASC) ,
+  INDEX `incomeReason_id` (`incomeReason_id` ASC) ,
+  INDEX `responsible_id` (`responsible_id` ASC) ,
+  CONSTRAINT `donator_id`
+    FOREIGN KEY (`donator_id` )
+    REFERENCES `iaedb`.`donator` (`donator_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `incomeReason_id`
+    FOREIGN KEY (`incomeReason_id` )
+    REFERENCES `iaedb`.`incomereason` (`incomeReason_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `responsible_id`
+    FOREIGN KEY (`responsible_id` )
+    REFERENCES `iaedb`.`responsible` (`responsible_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE  TABLE `iaedb`.`expenditure` (
+  `expenditure_id` VARCHAR(200) NOT NULL ,
+  `responsibleForExpenditure_id` VARCHAR(200) NULL ,
+  `reasonforExpenditure_id` VARCHAR(200) NULL ,
+  `expenditure_amount` DECIMAL(20,2) NULL ,
+  `expenditure_date` DATE NULL ,
+  PRIMARY KEY (`expenditure_id`) ,
+  INDEX `responsibleForExpenditure_id` (`responsibleForExpenditure_id` ASC) ,
+  INDEX `reasonforExpenditure_id` (`reasonforExpenditure_id` ASC) ,
+  CONSTRAINT `responsibleForExpenditure_id`
+    FOREIGN KEY (`responsibleForExpenditure_id` )
+    REFERENCES `iaedb`.`responsible` (`responsible_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `reasonforExpenditure_id`
+    FOREIGN KEY (`reasonforExpenditure_id` )
+    REFERENCES `iaedb`.`expenditurereason` (`expenditureReason_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE  TABLE `iaedb`.`user` (
+  `user_id` VARCHAR(200) NOT NULL ,
+  `user_name` VARCHAR(200) NOT NULL ,
+  `user_password` VARCHAR(1000) NOT NULL ,
+  PRIMARY KEY (`user_id`) );

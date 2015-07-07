@@ -1,0 +1,2418 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package view;
+
+import controller.ExpenditureController;
+import controller.ExpenditureReasonController;
+import controller.ResponsibleController;
+import functionalities.ComboSearch;
+import functionalities.LoadCombo;
+import functionalities.IdGenerator;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author Ershadi
+ */
+public class ManageExpenditure extends javax.swing.JFrame {
+
+    private IdGenerator idGenerator;
+    private ExpenditureController expenditureController;
+    private ResponsibleController responsibleController;
+    private ExpenditureReasonController expenditureReasonController;
+    private LoadCombo comboBoxFunctions;
+    private Object object[];
+    SimpleDateFormat simpleDateFormat;
+    String searchQuery;
+    private ComboSearch comboSearch1;
+    private ComboSearch comboSearch2;
+    private ComboSearch comboSearch3;
+    private ComboSearch comboSearch4;
+    private ComboSearch comboSearch5;
+    DefaultTableModel dtmForSearch;
+    DefaultTableModel dtmForUpdate;
+    DefaultTableModel dtmForDelete;
+
+    /**
+     * Creates new form ManageIncome
+     */
+    public ManageExpenditure() {
+        try {
+            initComponents();
+
+            idGenerator = new IdGenerator();
+            expenditureController = new ExpenditureController();
+            responsibleController = new ResponsibleController();
+            expenditureReasonController = new ExpenditureReasonController();
+            comboBoxFunctions = new LoadCombo();
+            simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            comboSearch1 = new ComboSearch();
+            comboSearch2 = new ComboSearch();
+            comboSearch3 = new ComboSearch();
+            comboSearch4 = new ComboSearch();
+            comboSearch5 = new ComboSearch();
+
+            add_expenditureIdLabel.setText(idGenerator.generateId("ee"));
+            loadComboInAddExpenditureTab();
+            loadComboInSearchExpenditureTab();
+            loadComboInUpdateExpenditureTab();
+            loadComboInDeleteExpenditureTab();
+
+            dtmForSearch = (DefaultTableModel) search_expenditureTable.getModel();
+            dtmForUpdate = (DefaultTableModel) update_expenditureTable.getModel();
+            dtmForDelete = (DefaultTableModel) delete_expenditureTable.getModel();
+
+            search_date1CalendarCombo.setEnabled(false);
+            search_date2CalendarCombo.setEnabled(false);
+            search_reasonComboBox.setEnabled(false);
+            search_takerComboBox.setEnabled(false);
+            search_amountTextField.setEnabled(false);
+            search_idComboBox.setEnabled(false);
+            search_date1Label.setEnabled(false);
+            search_date2Label.setEnabled(false);
+            search_reasonLabel.setEnabled(false);
+            search_takerLabel.setEnabled(false);
+            search_amountLabel.setEnabled(false);
+            search_idLabel.setEnabled(false);
+
+            update_date1CalendarCombo.setEnabled(false);
+            update_date2CalendarCombo.setEnabled(false);
+            update_reasonComboBox.setEnabled(false);
+            update_takerComboBox.setEnabled(false);
+            update_amountTextField.setEnabled(false);
+            update_idComboBox.setEnabled(false);
+            update_date1Label.setEnabled(false);
+            update_date2Label.setEnabled(false);
+            update_reasonLabel.setEnabled(false);
+            update_takerLabel.setEnabled(false);
+            update_amountLabel.setEnabled(false);
+            update_idLabel.setEnabled(false);
+
+            delete_date1CalendarCombo.setEnabled(false);
+            delete_date2CalendarCombo.setEnabled(false);
+            delete_reasonComboBox.setEnabled(false);
+            delete_takerComboBox.setEnabled(false);
+            delete_amountTextField.setEnabled(false);
+            delete_idComboBox.setEnabled(false);
+            delete_date1Label.setEnabled(false);
+            delete_date2Label.setEnabled(false);
+            delete_reasonLabel.setEnabled(false);
+            delete_takerLabel.setEnabled(false);
+            delete_amountLabel.setEnabled(false);
+            delete_idLabel.setEnabled(false);
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        manageExpenditureTabbedPane = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        add_expenditureReasonComboBox = new javax.swing.JComboBox();
+        add_expenditureAmountTextField = new javax.swing.JTextField();
+        add_expenditureDateCalendar = new org.freixas.jcalendar.JCalendar();
+        add_responsibleNameComboBox = new javax.swing.JComboBox();
+        add_savePrintExpenditureButton = new javax.swing.JButton();
+        add_saveExpenditureButton = new javax.swing.JButton();
+        add_newReasonForExpenditureButton = new javax.swing.JButton();
+        add_newResponsibleButton = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        add_expenditureIdLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        search_dateCheckBox = new javax.swing.JCheckBox();
+        search_rangeOfDatesCheckBox = new javax.swing.JCheckBox();
+        search_reasonCheckBox = new javax.swing.JCheckBox();
+        search_takerCheckBox = new javax.swing.JCheckBox();
+        search_amountCheckBox = new javax.swing.JCheckBox();
+        search_moreThanAmountCheckBox = new javax.swing.JCheckBox();
+        search_lessThanAmountCheckBox = new javax.swing.JCheckBox();
+        jPanel5 = new javax.swing.JPanel();
+        search_date1Label = new javax.swing.JLabel();
+        search_date1CalendarCombo = new org.freixas.jcalendar.JCalendarCombo();
+        search_date2Label = new javax.swing.JLabel();
+        search_date2CalendarCombo = new org.freixas.jcalendar.JCalendarCombo();
+        search_reasonLabel = new javax.swing.JLabel();
+        search_reasonComboBox = new javax.swing.JComboBox();
+        search_takerLabel = new javax.swing.JLabel();
+        search_takerComboBox = new javax.swing.JComboBox();
+        search_amountLabel = new javax.swing.JLabel();
+        search_amountTextField = new javax.swing.JTextField();
+        search_idLabel = new javax.swing.JLabel();
+        search_idComboBox = new javax.swing.JComboBox();
+        jButton6 = new javax.swing.JButton();
+        search_searchButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        search_expenditureTable = new javax.swing.JTable();
+        search_idCheckBox = new javax.swing.JCheckBox();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        update_dateCheckBox = new javax.swing.JCheckBox();
+        update_rangeOfDatesCheckBox = new javax.swing.JCheckBox();
+        update_reasonCheckBox = new javax.swing.JCheckBox();
+        update_takerCheckBox = new javax.swing.JCheckBox();
+        update_amountCheckBox = new javax.swing.JCheckBox();
+        update_moreThanAmountCheckBox = new javax.swing.JCheckBox();
+        update_lessThanAmountCheckBox = new javax.swing.JCheckBox();
+        jPanel9 = new javax.swing.JPanel();
+        update_date1Label = new javax.swing.JLabel();
+        update_date1CalendarCombo = new org.freixas.jcalendar.JCalendarCombo();
+        update_date2Label = new javax.swing.JLabel();
+        update_date2CalendarCombo = new org.freixas.jcalendar.JCalendarCombo();
+        update_reasonLabel = new javax.swing.JLabel();
+        update_reasonComboBox = new javax.swing.JComboBox();
+        update_takerLabel = new javax.swing.JLabel();
+        update_takerComboBox = new javax.swing.JComboBox();
+        update_amountLabel = new javax.swing.JLabel();
+        update_amountTextField = new javax.swing.JTextField();
+        update_idLabel = new javax.swing.JLabel();
+        update_idComboBox = new javax.swing.JComboBox();
+        update_searchButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        update_expenditureTable = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        update_responsibleComboBox = new javax.swing.JComboBox();
+        update_expenditureAmountTextField = new javax.swing.JTextField();
+        update_expenditureReasonComboBox = new javax.swing.JComboBox();
+        update_expenditureIdLabel = new javax.swing.JLabel();
+        update_reasonButton = new javax.swing.JButton();
+        update_addResponsibleButton = new javax.swing.JButton();
+        update_expenditureButton = new javax.swing.JButton();
+        update_printExpenditureButton = new javax.swing.JButton();
+        update_expenditureDateCalendar = new org.freixas.jcalendar.JCalendar();
+        update_idCheckBox = new javax.swing.JCheckBox();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        delete_dateCheckBox = new javax.swing.JCheckBox();
+        delete_rangeOfDatesCheckBox = new javax.swing.JCheckBox();
+        delete_reasonCheckBox = new javax.swing.JCheckBox();
+        delete_takerCheckBox = new javax.swing.JCheckBox();
+        delete_amountCheckBox = new javax.swing.JCheckBox();
+        delete_moreThanAmountCheckBox = new javax.swing.JCheckBox();
+        delete_lessThanAmountCheckBox = new javax.swing.JCheckBox();
+        jPanel13 = new javax.swing.JPanel();
+        delete_date1Label = new javax.swing.JLabel();
+        delete_date1CalendarCombo = new org.freixas.jcalendar.JCalendarCombo();
+        delete_date2Label = new javax.swing.JLabel();
+        delete_date2CalendarCombo = new org.freixas.jcalendar.JCalendarCombo();
+        delete_reasonLabel = new javax.swing.JLabel();
+        delete_reasonComboBox = new javax.swing.JComboBox();
+        delete_takerLabel = new javax.swing.JLabel();
+        delete_takerComboBox = new javax.swing.JComboBox();
+        delete_amountLabel = new javax.swing.JLabel();
+        delete_amountTextField = new javax.swing.JTextField();
+        delete_idLabel = new javax.swing.JLabel();
+        delete_idComboBox = new javax.swing.JComboBox();
+        delete_searchButton = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        delete_expenditureTable = new javax.swing.JTable();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
+        delete_expenditureIdLabel = new javax.swing.JLabel();
+        delete_expenditureButton = new javax.swing.JButton();
+        delete_responsibleLabel = new javax.swing.JLabel();
+        delete_expenditureReasonLabel = new javax.swing.JLabel();
+        delete_expenditureAmountLabel = new javax.swing.JLabel();
+        delete_dateLabel = new javax.swing.JLabel();
+        delete_idCheckBox = new javax.swing.JCheckBox();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        manageExpenditureTabbedPane.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+
+        jLabel2.setText("Reason for expenditure :");
+
+        jLabel3.setText("Amount :");
+
+        jLabel4.setText("Date :");
+
+        jLabel5.setText("Responsible :");
+
+        add_savePrintExpenditureButton.setText("Save and print");
+        add_savePrintExpenditureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_savePrintExpenditureButtonActionPerformed(evt);
+            }
+        });
+
+        add_saveExpenditureButton.setText("Save");
+        add_saveExpenditureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_saveExpenditureButtonActionPerformed(evt);
+            }
+        });
+
+        add_newReasonForExpenditureButton.setText("Add new reason for expenditure");
+        add_newReasonForExpenditureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_newReasonForExpenditureButtonActionPerformed(evt);
+            }
+        });
+
+        add_newResponsibleButton.setText("Add new responsible");
+        add_newResponsibleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_newResponsibleButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("Expenditure Id :");
+
+        add_expenditureIdLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel13))
+                .addGap(69, 69, 69)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(add_expenditureReasonComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(add_expenditureAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(add_responsibleNameComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(add_expenditureDateCalendar, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                    .addComponent(add_expenditureIdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(add_newReasonForExpenditureButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(add_newResponsibleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(add_saveExpenditureButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(add_savePrintExpenditureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(1437, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(add_expenditureIdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add_responsibleNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(add_newResponsibleButton))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(add_expenditureReasonComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(add_newReasonForExpenditureButton))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(add_expenditureAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(add_expenditureDateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add_savePrintExpenditureButton)
+                    .addComponent(add_saveExpenditureButton))
+                .addContainerGap(207, Short.MAX_VALUE))
+        );
+
+        manageExpenditureTabbedPane.addTab("Add New Expenditure Detail", jPanel1);
+
+        jLabel6.setText("Search expenditure from :");
+
+        search_dateCheckBox.setText("Date");
+        search_dateCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_dateCheckBoxActionPerformed(evt);
+            }
+        });
+
+        search_rangeOfDatesCheckBox.setText("Range of dates");
+        search_rangeOfDatesCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_rangeOfDatesCheckBoxActionPerformed(evt);
+            }
+        });
+
+        search_reasonCheckBox.setText("Reason");
+        search_reasonCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_reasonCheckBoxActionPerformed(evt);
+            }
+        });
+
+        search_takerCheckBox.setText("Taker");
+        search_takerCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_takerCheckBoxActionPerformed(evt);
+            }
+        });
+
+        search_amountCheckBox.setText("Amount");
+        search_amountCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_amountCheckBoxActionPerformed(evt);
+            }
+        });
+
+        search_moreThanAmountCheckBox.setText("More than given amount");
+        search_moreThanAmountCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_moreThanAmountCheckBoxActionPerformed(evt);
+            }
+        });
+
+        search_lessThanAmountCheckBox.setText("Less than given amount");
+        search_lessThanAmountCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_lessThanAmountCheckBoxActionPerformed(evt);
+            }
+        });
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        search_date1Label.setText("Date 1:");
+
+        search_date2Label.setText("Date 2 :");
+
+        search_reasonLabel.setText("Reason :");
+
+        search_takerLabel.setText("Taker");
+
+        search_amountLabel.setText("Amount :");
+
+        search_idLabel.setText("Expenditure id :");
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/print.png"))); // NOI18N
+        jButton6.setText("Print Receipt");
+
+        search_searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
+        search_searchButton.setText("Search");
+        search_searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_searchButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(search_date1Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(search_date1CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(search_date2Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(search_date2CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(search_reasonLabel)
+                    .addComponent(search_takerLabel))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(search_reasonComboBox, 0, 265, Short.MAX_VALUE)
+                    .addComponent(search_takerComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(search_idLabel))
+                    .addComponent(search_amountLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(search_idComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search_amountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66)
+                .addComponent(search_searchButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(search_amountLabel)
+                        .addComponent(search_amountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(search_date1Label)
+                        .addComponent(search_date1CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(search_reasonLabel)
+                        .addComponent(search_reasonComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(search_takerLabel)
+                        .addComponent(search_takerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(search_date2Label)
+                        .addComponent(search_date2CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(search_idLabel)
+                        .addComponent(search_idComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6)
+                    .addComponent(search_searchButton))
+                .addContainerGap())
+        );
+
+        search_expenditureTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Expenditure id", "Responsible", "Reason for expenditure", "Amount", "Date"
+            }
+        ));
+        jScrollPane1.setViewportView(search_expenditureTable);
+        if (search_expenditureTable.getColumnModel().getColumnCount() > 0) {
+            search_expenditureTable.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        search_idCheckBox.setText("Expenditure id");
+        search_idCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_idCheckBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(search_dateCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(search_rangeOfDatesCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(search_reasonCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(search_takerCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(search_amountCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(search_moreThanAmountCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(search_lessThanAmountCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(search_idCheckBox))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(901, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(search_dateCheckBox)
+                    .addComponent(search_rangeOfDatesCheckBox)
+                    .addComponent(search_reasonCheckBox)
+                    .addComponent(search_takerCheckBox)
+                    .addComponent(search_amountCheckBox)
+                    .addComponent(search_moreThanAmountCheckBox)
+                    .addComponent(search_lessThanAmountCheckBox)
+                    .addComponent(search_idCheckBox))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
+        );
+
+        manageExpenditureTabbedPane.addTab("Search Expenditure Detail", jPanel2);
+
+        jLabel21.setText("Search expenditure from :");
+
+        update_dateCheckBox.setText("Date");
+        update_dateCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_dateCheckBoxActionPerformed(evt);
+            }
+        });
+
+        update_rangeOfDatesCheckBox.setText("Range of dates");
+        update_rangeOfDatesCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_rangeOfDatesCheckBoxActionPerformed(evt);
+            }
+        });
+
+        update_reasonCheckBox.setText("Reason");
+        update_reasonCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_reasonCheckBoxActionPerformed(evt);
+            }
+        });
+
+        update_takerCheckBox.setText("Taker");
+        update_takerCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_takerCheckBoxActionPerformed(evt);
+            }
+        });
+
+        update_amountCheckBox.setText("Amount");
+        update_amountCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_amountCheckBoxActionPerformed(evt);
+            }
+        });
+
+        update_moreThanAmountCheckBox.setText("More than given amount");
+        update_moreThanAmountCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_moreThanAmountCheckBoxActionPerformed(evt);
+            }
+        });
+
+        update_lessThanAmountCheckBox.setText("Less than given amount");
+        update_lessThanAmountCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_lessThanAmountCheckBoxActionPerformed(evt);
+            }
+        });
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        update_date1Label.setText("Date 1:");
+
+        update_date2Label.setText("Date 2 :");
+
+        update_reasonLabel.setText("Reason :");
+
+        update_takerLabel.setText("Taker :");
+
+        update_amountLabel.setText("Amount :");
+
+        update_idLabel.setText("Expenditure id :");
+
+        update_searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
+        update_searchButton.setText("Search");
+        update_searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_searchButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(update_date1Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(update_date1CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(update_date2Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(update_date2CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(update_takerLabel)
+                    .addComponent(update_reasonLabel))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(update_reasonComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(update_takerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(update_idLabel)
+                    .addComponent(update_amountLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(update_amountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update_idComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(82, 82, 82)
+                .addComponent(update_searchButton)
+                .addContainerGap(262, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(update_date1Label)
+                    .addComponent(update_date1CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update_reasonLabel)
+                    .addComponent(update_reasonComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update_amountLabel)
+                    .addComponent(update_amountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(update_date2Label)
+                    .addComponent(update_date2CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update_takerLabel)
+                    .addComponent(update_takerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update_idLabel)
+                    .addComponent(update_idComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(update_searchButton)
+                .addContainerGap())
+        );
+
+        update_expenditureTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Expenditure id", "Responsible", "Reason for expenditure", "Amount", "Date"
+            }
+        ));
+        update_expenditureTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                update_expenditureTableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(update_expenditureTable);
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jLabel15.setText("Expenditure id :");
+
+        jLabel17.setText("Reason for expenditure :");
+
+        jLabel18.setText("Amount :");
+
+        jLabel19.setText("Date :");
+
+        jLabel27.setText("Responsible :");
+
+        update_reasonButton.setText("Add new reason for donation");
+        update_reasonButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_reasonButtonActionPerformed(evt);
+            }
+        });
+
+        update_addResponsibleButton.setText("Add new responsible");
+        update_addResponsibleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_addResponsibleButtonActionPerformed(evt);
+            }
+        });
+
+        update_expenditureButton.setText("Update");
+        update_expenditureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_expenditureButtonActionPerformed(evt);
+            }
+        });
+
+        update_printExpenditureButton.setText("Update and print");
+        update_printExpenditureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_printExpenditureButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGap(309, 309, 309)
+                            .addComponent(update_reasonButton, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(update_responsibleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(update_addResponsibleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(update_expenditureDateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(update_expenditureButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(update_printExpenditureButton, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)))
+                    .addComponent(update_expenditureAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update_expenditureIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update_expenditureReasonComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(update_expenditureButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(update_printExpenditureButton)
+                        .addGap(7, 7, 7))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(update_expenditureIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(update_responsibleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel27)
+                            .addComponent(update_addResponsibleButton))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(update_expenditureReasonComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(update_reasonButton))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(update_expenditureAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19)
+                            .addComponent(update_expenditureDateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        update_idCheckBox.setText("Expenditure id");
+        update_idCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_idCheckBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(18, 18, 18)
+                        .addComponent(update_dateCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(update_rangeOfDatesCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(update_reasonCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(update_takerCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(update_amountCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(update_moreThanAmountCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(update_lessThanAmountCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(update_idCheckBox))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(816, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(update_dateCheckBox)
+                    .addComponent(update_rangeOfDatesCheckBox)
+                    .addComponent(update_reasonCheckBox)
+                    .addComponent(update_takerCheckBox)
+                    .addComponent(update_amountCheckBox)
+                    .addComponent(update_moreThanAmountCheckBox)
+                    .addComponent(update_lessThanAmountCheckBox)
+                    .addComponent(update_idCheckBox))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
+
+        manageExpenditureTabbedPane.addTab("Update Existing Expenditure Detail", jPanel8);
+
+        jLabel26.setText("Search expenditure from :");
+
+        delete_dateCheckBox.setText("Date");
+        delete_dateCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_dateCheckBoxActionPerformed(evt);
+            }
+        });
+
+        delete_rangeOfDatesCheckBox.setText("Range of dates");
+        delete_rangeOfDatesCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_rangeOfDatesCheckBoxActionPerformed(evt);
+            }
+        });
+
+        delete_reasonCheckBox.setText("Reason");
+        delete_reasonCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_reasonCheckBoxActionPerformed(evt);
+            }
+        });
+
+        delete_takerCheckBox.setText("Taker");
+        delete_takerCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_takerCheckBoxActionPerformed(evt);
+            }
+        });
+
+        delete_amountCheckBox.setText("Amount");
+        delete_amountCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_amountCheckBoxActionPerformed(evt);
+            }
+        });
+
+        delete_moreThanAmountCheckBox.setText("More than given amount");
+        delete_moreThanAmountCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_moreThanAmountCheckBoxActionPerformed(evt);
+            }
+        });
+
+        delete_lessThanAmountCheckBox.setText("Less than given amount");
+        delete_lessThanAmountCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_lessThanAmountCheckBoxActionPerformed(evt);
+            }
+        });
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        delete_date1Label.setText("Date 1:");
+
+        delete_date2Label.setText("Date 2 :");
+
+        delete_reasonLabel.setText("Reason :");
+
+        delete_takerLabel.setText("Taker :");
+
+        delete_amountLabel.setText("Amount :");
+
+        delete_idLabel.setText("Expenditure id :");
+
+        delete_searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
+        delete_searchButton.setText("Search");
+        delete_searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_searchButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(delete_date1Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(delete_date1CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(delete_date2Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(delete_date2CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(delete_takerLabel)
+                    .addComponent(delete_reasonLabel))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(delete_reasonComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(delete_takerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(delete_idLabel)
+                    .addComponent(delete_amountLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(delete_amountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delete_idComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addComponent(delete_searchButton)
+                .addGap(134, 134, 134))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(delete_date1Label)
+                    .addComponent(delete_date1CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delete_reasonLabel)
+                    .addComponent(delete_reasonComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delete_amountLabel)
+                    .addComponent(delete_amountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(delete_date2Label)
+                    .addComponent(delete_date2CalendarCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delete_takerLabel)
+                    .addComponent(delete_takerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delete_idLabel)
+                    .addComponent(delete_idComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(delete_searchButton)
+                .addContainerGap())
+        );
+
+        delete_expenditureTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Expenditure id", "Responsible", "Reason for expenditure", "Amount", "Date"
+            }
+        ));
+        delete_expenditureTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                delete_expenditureTableMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(delete_expenditureTable);
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jLabel16.setText("Expenditure id :");
+
+        jLabel42.setText("Reason for expenditure :");
+
+        jLabel43.setText("Amount :");
+
+        jLabel54.setText("Date :");
+
+        jLabel55.setText("Responsible :");
+
+        delete_expenditureButton.setText("Delete");
+        delete_expenditureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_expenditureButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel43)
+                    .addComponent(jLabel54)
+                    .addComponent(jLabel55)
+                    .addComponent(jLabel42))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(delete_expenditureAmountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(delete_dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(129, 129, 129))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                        .addComponent(delete_expenditureReasonLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(delete_expenditureIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(delete_responsibleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(delete_expenditureButton)
+                .addContainerGap())
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(delete_expenditureIdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel55)
+                    .addComponent(delete_responsibleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(delete_expenditureReasonLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel43, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(delete_expenditureAmountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel54)
+                    .addComponent(delete_dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(delete_expenditureButton)
+                .addContainerGap(113, Short.MAX_VALUE))
+        );
+
+        delete_idCheckBox.setText("Expenditure id");
+        delete_idCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_idCheckBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addGap(18, 18, 18)
+                        .addComponent(delete_dateCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(delete_rangeOfDatesCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(delete_reasonCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(delete_takerCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(delete_amountCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(delete_moreThanAmountCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(delete_lessThanAmountCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(delete_idCheckBox))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(911, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(delete_dateCheckBox)
+                    .addComponent(delete_rangeOfDatesCheckBox)
+                    .addComponent(delete_reasonCheckBox)
+                    .addComponent(delete_takerCheckBox)
+                    .addComponent(delete_amountCheckBox)
+                    .addComponent(delete_moreThanAmountCheckBox)
+                    .addComponent(delete_lessThanAmountCheckBox)
+                    .addComponent(delete_idCheckBox))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
+        );
+
+        manageExpenditureTabbedPane.addTab("Delete Existing Expenditure Detail", jPanel12);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(manageExpenditureTabbedPane)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(manageExpenditureTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 255, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void add_newResponsibleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_newResponsibleButtonActionPerformed
+        try {
+            NewResponsible newResponsible = new NewResponsible(this, rootPaneCheckingEnabled);
+            newResponsible.setLocationRelativeTo(null);
+            newResponsible.setVisible(true);
+
+            if (!newResponsible.isVisible()) {
+                loadComboInAddExpenditureTab();
+                loadComboInSearchExpenditureTab();
+                loadComboInUpdateExpenditureTab();
+                loadComboInDeleteExpenditureTab();
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_add_newResponsibleButtonActionPerformed
+
+    private void add_newReasonForExpenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_newReasonForExpenditureButtonActionPerformed
+        try {
+            NewExpenditureReason newExpenditureReason = new NewExpenditureReason(this, rootPaneCheckingEnabled);
+            newExpenditureReason.setLocationRelativeTo(null);
+            newExpenditureReason.setVisible(true);
+
+            if (!newExpenditureReason.isVisible()) {
+                loadComboInAddExpenditureTab();
+                loadComboInSearchExpenditureTab();
+                loadComboInUpdateExpenditureTab();
+                loadComboInDeleteExpenditureTab();
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_add_newReasonForExpenditureButtonActionPerformed
+
+    private void add_saveExpenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_saveExpenditureButtonActionPerformed
+        try {
+            if (add_responsibleNameComboBox.getSelectedItem() != null && add_expenditureReasonComboBox.getSelectedItem() != null
+                    && add_expenditureAmountTextField.getText() != null) {
+                String expenditure_id = add_expenditureIdLabel.getText();
+
+                String responsible_name = add_responsibleNameComboBox.getSelectedItem() + "";
+                object = responsibleController.searchResponsible("responsible_name", responsible_name);
+                String responsible_id = (String) object[0];
+
+                String expenditureReason_title = add_expenditureReasonComboBox.getSelectedItem() + "";
+                object = expenditureReasonController.searchExpenditureReason("expenditureReason_title", expenditureReason_title);
+                String expenditureReason_id = (String) object[0];
+
+                double expenditure_amount = Double.parseDouble(add_expenditureAmountTextField.getText());
+                String expenditure_date = simpleDateFormat.format(add_expenditureDateCalendar.getDate());
+
+                int result = expenditureController.addExpenditure(expenditure_id, responsible_id, expenditureReason_id, expenditure_amount, expenditure_date);
+
+                if (result == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Expenditure saved successfully.");
+
+                    add_expenditureIdLabel.setText(idGenerator.generateId("ee"));
+                    add_expenditureAmountTextField.setText(null);
+
+                    loadComboInAddExpenditureTab();
+                    loadComboInSearchExpenditureTab();
+                    loadComboInUpdateExpenditureTab();
+                    loadComboInDeleteExpenditureTab();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Expenditure saving failed. Please retry saving with corrrect details.");
+                }
+
+                expenditure_id = null;
+                responsible_name = null;
+                responsible_id = null;
+                expenditureReason_title = null;
+                expenditureReason_id = null;
+                System.gc();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "None of the fields cannot be null. Please recheck before you save expenditure.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_add_saveExpenditureButtonActionPerformed
+
+    private void add_savePrintExpenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_savePrintExpenditureButtonActionPerformed
+        add_saveExpenditureButton.doClick();
+    }//GEN-LAST:event_add_savePrintExpenditureButtonActionPerformed
+
+    private void search_dateCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_dateCheckBoxActionPerformed
+        search_idCheckBox.setSelected(false);
+        search_rangeOfDatesCheckBox.setSelected(false);
+
+        search_date1Label.setEnabled(true);
+        search_date1CalendarCombo.setEnabled(true);
+
+        search_date2Label.setEnabled(false);
+        search_date2CalendarCombo.setEnabled(false);
+
+        search_idLabel.setEnabled(false);
+        search_idComboBox.setEnabled(false);
+
+        if (!search_dateCheckBox.isSelected()) {
+            search_date1Label.setEnabled(false);
+            search_date1CalendarCombo.setEnabled(false);
+        }
+    }//GEN-LAST:event_search_dateCheckBoxActionPerformed
+
+    private void search_rangeOfDatesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_rangeOfDatesCheckBoxActionPerformed
+        search_idCheckBox.setSelected(false);
+        search_dateCheckBox.setSelected(false);
+
+        search_date1Label.setEnabled(true);
+        search_date1CalendarCombo.setEnabled(true);
+
+        search_date2Label.setEnabled(true);
+        search_date2CalendarCombo.setEnabled(true);
+
+        search_idLabel.setEnabled(false);
+        search_idComboBox.setEnabled(false);
+
+        if (!search_rangeOfDatesCheckBox.isSelected()) {
+            search_date1Label.setEnabled(false);
+            search_date1CalendarCombo.setEnabled(false);
+
+            search_date2Label.setEnabled(false);
+            search_date2CalendarCombo.setEnabled(false);
+        }
+    }//GEN-LAST:event_search_rangeOfDatesCheckBoxActionPerformed
+
+    private void search_reasonCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_reasonCheckBoxActionPerformed
+        search_idCheckBox.setSelected(false);
+        search_reasonLabel.setEnabled(true);
+        search_reasonComboBox.setEnabled(true);
+
+        search_idLabel.setEnabled(false);
+        search_idComboBox.setEnabled(false);
+
+        if (!search_reasonCheckBox.isSelected()) {
+            search_reasonLabel.setEnabled(false);
+            search_reasonComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_search_reasonCheckBoxActionPerformed
+
+    private void search_takerCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_takerCheckBoxActionPerformed
+        search_idCheckBox.setSelected(false);
+        search_takerLabel.setEnabled(true);
+        search_takerComboBox.setEnabled(true);
+
+        search_idLabel.setEnabled(false);
+        search_idComboBox.setEnabled(false);
+
+        if (!search_takerCheckBox.isSelected()) {
+            search_takerLabel.setEnabled(false);
+            search_takerComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_search_takerCheckBoxActionPerformed
+
+    private void search_amountCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_amountCheckBoxActionPerformed
+        search_idCheckBox.setSelected(false);
+        search_moreThanAmountCheckBox.setSelected(false);
+        search_lessThanAmountCheckBox.setSelected(false);
+
+        search_amountLabel.setEnabled(true);
+        search_amountTextField.setEnabled(true);
+
+        search_idLabel.setEnabled(false);
+        search_idComboBox.setEnabled(false);
+
+        if (!search_amountCheckBox.isSelected()) {
+            search_amountLabel.setEnabled(false);
+            search_amountTextField.setEnabled(false);
+        }
+    }//GEN-LAST:event_search_amountCheckBoxActionPerformed
+
+    private void search_moreThanAmountCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_moreThanAmountCheckBoxActionPerformed
+        search_idCheckBox.setSelected(false);
+        search_amountCheckBox.setSelected(false);
+        search_lessThanAmountCheckBox.setSelected(false);
+
+        search_amountLabel.setEnabled(true);
+        search_amountTextField.setEnabled(true);
+
+        search_idLabel.setEnabled(false);
+        search_idComboBox.setEnabled(false);
+
+        if (!search_moreThanAmountCheckBox.isSelected()) {
+            search_amountLabel.setEnabled(false);
+            search_amountTextField.setEnabled(false);
+        }
+    }//GEN-LAST:event_search_moreThanAmountCheckBoxActionPerformed
+
+    private void search_lessThanAmountCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_lessThanAmountCheckBoxActionPerformed
+        search_idCheckBox.setSelected(false);
+        search_amountCheckBox.setSelected(false);
+        search_moreThanAmountCheckBox.setSelected(false);
+
+        search_amountLabel.setEnabled(true);
+        search_amountTextField.setEnabled(true);
+
+        search_idLabel.setEnabled(false);
+        search_idComboBox.setEnabled(false);
+
+        if (!search_lessThanAmountCheckBox.isSelected()) {
+            search_amountLabel.setEnabled(false);
+            search_amountTextField.setEnabled(false);
+        }
+    }//GEN-LAST:event_search_lessThanAmountCheckBoxActionPerformed
+
+    private void search_idCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_idCheckBoxActionPerformed
+        search_dateCheckBox.setSelected(false);
+        search_rangeOfDatesCheckBox.setSelected(false);
+        search_reasonCheckBox.setSelected(false);
+        search_takerCheckBox.setSelected(false);
+        search_amountCheckBox.setSelected(false);
+        search_moreThanAmountCheckBox.setSelected(false);
+        search_lessThanAmountCheckBox.setSelected(false);
+
+        search_date1CalendarCombo.setEnabled(false);
+        search_date2CalendarCombo.setEnabled(false);
+        search_reasonComboBox.setEnabled(false);
+        search_takerComboBox.setEnabled(false);
+        search_amountTextField.setEnabled(false);
+        search_date1Label.setEnabled(false);
+        search_date2Label.setEnabled(false);
+        search_reasonLabel.setEnabled(false);
+        search_takerLabel.setEnabled(false);
+        search_amountLabel.setEnabled(false);
+
+        search_idLabel.setEnabled(true);
+        search_idComboBox.setEnabled(true);
+
+        if (!search_idCheckBox.isSelected()) {
+            search_idLabel.setEnabled(false);
+            search_idComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_search_idCheckBoxActionPerformed
+
+    private void search_searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_searchButtonActionPerformed
+        try {
+            if (search_dateCheckBox.isSelected() || search_rangeOfDatesCheckBox.isSelected()
+                    || search_reasonCheckBox.isSelected() || search_takerCheckBox.isSelected()
+                    || search_amountCheckBox.isSelected() || search_moreThanAmountCheckBox.isSelected()
+                    || search_lessThanAmountCheckBox.isSelected() || search_idCheckBox.isSelected()) {
+                String query = "SELECT * FROM expenditure ";
+                if (search_idCheckBox.isSelected()) {
+                    String expenditure_id = search_idComboBox.getSelectedItem() + "";
+                    query += "WHERE expenditure_id = '" + expenditure_id + "' ";
+
+                } else {
+                    query += "WHERE ";
+                    boolean useAnd = false;
+                    if (search_dateCheckBox.isSelected()) {
+                        String expenditure_date = simpleDateFormat.format(search_date1CalendarCombo.getDate());
+                        query += "expenditure_date ='" + expenditure_date + "' ";
+                        useAnd = true;
+
+                    } else if (search_rangeOfDatesCheckBox.isSelected()) {
+                        String date1 = simpleDateFormat.format(search_date1CalendarCombo.getDate());
+                        String date2 = simpleDateFormat.format(search_date2CalendarCombo.getDate());
+
+                        query += "expenditure_date BETWEEN '" + date1 + "' AND '" + date2 + "' ";
+                        useAnd = true;
+                    }
+
+                    if (search_reasonCheckBox.isSelected()) {
+                        String expenditure_reason = search_reasonComboBox.getSelectedItem() + "";
+                        object = expenditureReasonController.searchExpenditureReason("expenditureReason_title", expenditure_reason);
+                        String expenditureReason_id = (String) object[0];
+
+                        if (useAnd) {
+                            query += "AND reasonforExpenditure_id ='" + expenditureReason_id + "' ";
+                        } else {
+                            query += "reasonforExpenditure_id ='" + expenditureReason_id + "' ";
+                        }
+                        useAnd = true;
+                    }
+
+                    if (search_takerCheckBox.isSelected()) {
+                        String responsible_name = search_takerComboBox.getSelectedItem() + "";
+                        object = responsibleController.searchResponsible("responsible_name", responsible_name);
+                        String responsible_id = (String) object[0];
+
+                        if (useAnd) {
+                            query += "AND responsibleForExpenditure_id ='" + responsible_id + "' ";
+                        } else {
+                            query += "responsibleForExpenditure_id ='" + responsible_id + "' ";
+                        }
+                        useAnd = true;
+                    }
+
+                    if (search_amountCheckBox.isSelected()) {
+                        double expenditure_amount = Double.parseDouble(search_amountTextField.getText());
+
+                        if (useAnd) {
+                            query += "AND expenditure_amount ='" + expenditure_amount + "' ";
+                        } else {
+                            query += "expenditure_amount ='" + expenditure_amount + "' ";
+                        }
+                    } else if (search_moreThanAmountCheckBox.isSelected()) {
+                        double expenditure_amount = Double.parseDouble(search_amountTextField.getText());
+
+                        if (useAnd) {
+                            query += "AND expenditure_amount >'" + expenditure_amount + "' ";
+                        } else {
+                            query += "expenditure_amount >'" + expenditure_amount + "' ";
+                        }
+                    } else if (search_lessThanAmountCheckBox.isSelected()) {
+                        double expenditure_amount = Double.parseDouble(search_amountTextField.getText());
+
+                        if (useAnd) {
+                            query += "AND expenditure_amount <'" + expenditure_amount + "' ";
+                        } else {
+                            query += "expenditure_amount <'" + expenditure_amount + "' ";
+                        }
+                    }
+                }
+
+                ArrayList<Object[]> arrayList = expenditureController.searchAllExpenditure(query);
+                dtmForSearch.setRowCount(0);
+
+                for (int i = 0; i < arrayList.size(); i++) {
+                    Object[] objectToFillTable = new Object[5];
+
+                    objectToFillTable[0] = arrayList.get(i)[0];
+
+                    object = responsibleController.searchResponsible("responsible_id", (String) arrayList.get(i)[1]);
+                    objectToFillTable[1] = object[1];
+
+                    object = expenditureReasonController.searchExpenditureReason("expenditureReason_id", (String) arrayList.get(i)[2]);
+                    objectToFillTable[2] = object[1];
+
+                    objectToFillTable[3] = arrayList.get(i)[3];
+                    objectToFillTable[4] = arrayList.get(i)[4];
+
+                    dtmForSearch.addRow(objectToFillTable);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Please select at least one filter to search exprnditure data");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_search_searchButtonActionPerformed
+
+    private void update_dateCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_dateCheckBoxActionPerformed
+        update_idCheckBox.setSelected(false);
+        update_rangeOfDatesCheckBox.setSelected(false);
+
+        update_date1Label.setEnabled(true);
+        update_date1CalendarCombo.setEnabled(true);
+
+        update_date2Label.setEnabled(false);
+        update_date2CalendarCombo.setEnabled(false);
+
+        update_idLabel.setEnabled(false);
+        update_idComboBox.setEnabled(false);
+
+        if (!update_dateCheckBox.isSelected()) {
+            update_date1Label.setEnabled(false);
+            update_date1CalendarCombo.setEnabled(false);
+        }
+    }//GEN-LAST:event_update_dateCheckBoxActionPerformed
+
+    private void update_rangeOfDatesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_rangeOfDatesCheckBoxActionPerformed
+        update_idCheckBox.setSelected(false);
+        update_dateCheckBox.setSelected(false);
+
+        update_date1Label.setEnabled(true);
+        update_date1CalendarCombo.setEnabled(true);
+
+        update_date2Label.setEnabled(true);
+        update_date2CalendarCombo.setEnabled(true);
+
+        update_idLabel.setEnabled(false);
+        update_idComboBox.setEnabled(false);
+
+        if (!update_rangeOfDatesCheckBox.isSelected()) {
+            update_date1Label.setEnabled(false);
+            update_date1CalendarCombo.setEnabled(false);
+
+            update_date2Label.setEnabled(false);
+            update_date2CalendarCombo.setEnabled(false);
+        }
+    }//GEN-LAST:event_update_rangeOfDatesCheckBoxActionPerformed
+
+    private void update_reasonCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_reasonCheckBoxActionPerformed
+        update_idCheckBox.setSelected(false);
+        update_reasonLabel.setEnabled(true);
+        update_reasonComboBox.setEnabled(true);
+
+        update_idLabel.setEnabled(false);
+        update_idComboBox.setEnabled(false);
+
+        if (!update_reasonCheckBox.isSelected()) {
+            update_reasonLabel.setEnabled(false);
+            update_reasonComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_update_reasonCheckBoxActionPerformed
+
+    private void update_takerCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_takerCheckBoxActionPerformed
+        update_idCheckBox.setSelected(false);
+        update_takerLabel.setEnabled(true);
+        update_takerComboBox.setEnabled(true);
+
+        update_idLabel.setEnabled(false);
+        update_idComboBox.setEnabled(false);
+
+        if (!update_takerCheckBox.isSelected()) {
+            update_takerLabel.setEnabled(false);
+            update_takerComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_update_takerCheckBoxActionPerformed
+
+    private void update_amountCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_amountCheckBoxActionPerformed
+        update_idCheckBox.setSelected(false);
+        update_moreThanAmountCheckBox.setSelected(false);
+        update_lessThanAmountCheckBox.setSelected(false);
+
+        update_amountLabel.setEnabled(true);
+        update_amountTextField.setEnabled(true);
+
+        update_idLabel.setEnabled(false);
+        update_idComboBox.setEnabled(false);
+
+        if (!update_amountCheckBox.isSelected()) {
+            update_amountLabel.setEnabled(false);
+            update_amountTextField.setEnabled(false);
+        }
+    }//GEN-LAST:event_update_amountCheckBoxActionPerformed
+
+    private void update_moreThanAmountCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_moreThanAmountCheckBoxActionPerformed
+        update_idCheckBox.setSelected(false);
+        update_amountCheckBox.setSelected(false);
+        update_lessThanAmountCheckBox.setSelected(false);
+
+        update_amountLabel.setEnabled(true);
+        update_amountTextField.setEnabled(true);
+
+        update_idLabel.setEnabled(false);
+        update_idComboBox.setEnabled(false);
+
+        if (!update_moreThanAmountCheckBox.isSelected()) {
+            update_amountLabel.setEnabled(false);
+            update_amountTextField.setEnabled(false);
+        }
+    }//GEN-LAST:event_update_moreThanAmountCheckBoxActionPerformed
+
+    private void update_lessThanAmountCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_lessThanAmountCheckBoxActionPerformed
+        update_idCheckBox.setSelected(false);
+        update_amountCheckBox.setSelected(false);
+        update_moreThanAmountCheckBox.setSelected(false);
+
+        update_amountLabel.setEnabled(true);
+        update_amountTextField.setEnabled(true);
+
+        update_idLabel.setEnabled(false);
+        update_idComboBox.setEnabled(false);
+
+        if (!update_lessThanAmountCheckBox.isSelected()) {
+            update_amountLabel.setEnabled(false);
+            update_amountTextField.setEnabled(false);
+        }
+    }//GEN-LAST:event_update_lessThanAmountCheckBoxActionPerformed
+
+    private void update_idCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_idCheckBoxActionPerformed
+        update_dateCheckBox.setSelected(false);
+        update_rangeOfDatesCheckBox.setSelected(false);
+        update_reasonCheckBox.setSelected(false);
+        update_takerCheckBox.setSelected(false);
+        update_amountCheckBox.setSelected(false);
+        update_moreThanAmountCheckBox.setSelected(false);
+        update_lessThanAmountCheckBox.setSelected(false);
+
+        update_date1CalendarCombo.setEnabled(false);
+        update_date2CalendarCombo.setEnabled(false);
+        update_reasonComboBox.setEnabled(false);
+        update_takerComboBox.setEnabled(false);
+        update_amountTextField.setEnabled(false);
+        update_date1Label.setEnabled(false);
+        update_date2Label.setEnabled(false);
+        update_reasonLabel.setEnabled(false);
+        update_takerLabel.setEnabled(false);
+        update_amountLabel.setEnabled(false);
+
+        update_idLabel.setEnabled(true);
+        update_idComboBox.setEnabled(true);
+
+        if (!update_idCheckBox.isSelected()) {
+            update_idLabel.setEnabled(false);
+            update_idComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_update_idCheckBoxActionPerformed
+
+    private void update_searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_searchButtonActionPerformed
+        try {
+            if (update_dateCheckBox.isSelected() || update_rangeOfDatesCheckBox.isSelected()
+                    || update_reasonCheckBox.isSelected() || update_takerCheckBox.isSelected()
+                    || update_amountCheckBox.isSelected() || update_moreThanAmountCheckBox.isSelected()
+                    || update_lessThanAmountCheckBox.isSelected() || update_idCheckBox.isSelected()) {
+                String query = "SELECT * FROM expenditure ";
+                if (update_idCheckBox.isSelected()) {
+                    String expenditure_id = update_idComboBox.getSelectedItem() + "";
+                    query += "WHERE expenditure_id = '" + expenditure_id + "' ";
+
+                } else {
+                    query += "WHERE ";
+                    boolean useAnd = false;
+                    if (update_dateCheckBox.isSelected()) {
+                        String expenditure_date = simpleDateFormat.format(update_date1CalendarCombo.getDate());
+                        query += "expenditure_date ='" + expenditure_date + "' ";
+                        useAnd = true;
+
+                    } else if (update_rangeOfDatesCheckBox.isSelected()) {
+                        String date1 = simpleDateFormat.format(update_date1CalendarCombo.getDate());
+                        String date2 = simpleDateFormat.format(update_date2CalendarCombo.getDate());
+
+                        query += "expenditure_date BETWEEN '" + date1 + "' AND '" + date2 + "' ";
+                        useAnd = true;
+                    }
+
+                    if (update_reasonCheckBox.isSelected()) {
+                        String expenditure_reason = update_reasonComboBox.getSelectedItem() + "";
+                        object = expenditureReasonController.searchExpenditureReason("expenditureReason_title", expenditure_reason);
+                        String expenditureReason_id = (String) object[0];
+
+                        if (useAnd) {
+                            query += "AND reasonforExpenditure_id ='" + expenditureReason_id + "' ";
+                        } else {
+                            query += "reasonforExpenditure_id ='" + expenditureReason_id + "' ";
+                        }
+                        useAnd = true;
+                    }
+
+                    if (update_takerCheckBox.isSelected()) {
+                        String responsible_name = update_takerComboBox.getSelectedItem() + "";
+                        object = responsibleController.searchResponsible("responsible_name", responsible_name);
+                        String responsible_id = (String) object[0];
+
+                        if (useAnd) {
+                            query += "AND responsibleForExpenditure_id ='" + responsible_id + "' ";
+                        } else {
+                            query += "responsibleForExpenditure_id ='" + responsible_id + "' ";
+                        }
+                        useAnd = true;
+                    }
+
+                    if (update_amountCheckBox.isSelected()) {
+                        double expenditure_amount = Double.parseDouble(update_amountTextField.getText());
+
+                        if (useAnd) {
+                            query += "AND expenditure_amount ='" + expenditure_amount + "' ";
+                        } else {
+                            query += "expenditure_amount ='" + expenditure_amount + "' ";
+                        }
+                    } else if (update_moreThanAmountCheckBox.isSelected()) {
+                        double expenditure_amount = Double.parseDouble(update_amountTextField.getText());
+
+                        if (useAnd) {
+                            query += "AND expenditure_amount >'" + expenditure_amount + "' ";
+                        } else {
+                            query += "expenditure_amount >'" + expenditure_amount + "' ";
+                        }
+                    } else if (update_lessThanAmountCheckBox.isSelected()) {
+                        double expenditure_amount = Double.parseDouble(update_amountTextField.getText());
+
+                        if (useAnd) {
+                            query += "AND expenditure_amount <'" + expenditure_amount + "' ";
+                        } else {
+                            query += "expenditure_amount <'" + expenditure_amount + "' ";
+                        }
+                    }
+                }
+
+                ArrayList<Object[]> arrayList = expenditureController.searchAllExpenditure(query);
+                dtmForUpdate.setRowCount(0);
+
+                for (int i = 0; i < arrayList.size(); i++) {
+                    Object[] objectToFillTable = new Object[5];
+
+                    objectToFillTable[0] = arrayList.get(i)[0];
+
+                    object = responsibleController.searchResponsible("responsible_id", (String) arrayList.get(i)[1]);
+                    objectToFillTable[1] = object[1];
+
+                    object = expenditureReasonController.searchExpenditureReason("expenditureReason_id", (String) arrayList.get(i)[2]);
+                    objectToFillTable[2] = object[1];
+
+                    objectToFillTable[3] = arrayList.get(i)[3];
+                    objectToFillTable[4] = arrayList.get(i)[4];
+
+                    dtmForUpdate.addRow(objectToFillTable);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Please select at least one filter to search exprnditure data");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_update_searchButtonActionPerformed
+
+    private void update_expenditureTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_update_expenditureTableMouseClicked
+        try {
+            int selectedRow = update_expenditureTable.getSelectedRow();
+
+            update_expenditureIdLabel.setText((String) dtmForUpdate.getValueAt(selectedRow, 0));
+            update_responsibleComboBox.setSelectedItem((String) dtmForUpdate.getValueAt(selectedRow, 1));
+            update_expenditureReasonComboBox.setSelectedItem((String) dtmForUpdate.getValueAt(selectedRow, 2));
+            update_expenditureAmountTextField.setText((String) dtmForUpdate.getValueAt(selectedRow, 3));
+
+            Date date = simpleDateFormat.parse((String) dtmForUpdate.getValueAt(selectedRow, 4));
+            update_expenditureDateCalendar.setDate(date);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_update_expenditureTableMouseClicked
+
+    private void update_addResponsibleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_addResponsibleButtonActionPerformed
+        try {
+            NewResponsible newResponsible = new NewResponsible(this, rootPaneCheckingEnabled);
+            newResponsible.setLocationRelativeTo(null);
+            newResponsible.setVisible(true);
+
+            if (!newResponsible.isVisible()) {
+                loadComboInAddExpenditureTab();
+                loadComboInSearchExpenditureTab();
+                loadComboInUpdateExpenditureTab();
+                loadComboInDeleteExpenditureTab();
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_update_addResponsibleButtonActionPerformed
+
+    private void update_reasonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_reasonButtonActionPerformed
+        try {
+            NewExpenditureReason newExpenditureReason = new NewExpenditureReason(this, rootPaneCheckingEnabled);
+            newExpenditureReason.setLocationRelativeTo(null);
+            newExpenditureReason.setVisible(true);
+
+            if (!newExpenditureReason.isVisible()) {
+                loadComboInAddExpenditureTab();
+                loadComboInSearchExpenditureTab();
+                loadComboInUpdateExpenditureTab();
+                loadComboInDeleteExpenditureTab();
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_update_reasonButtonActionPerformed
+
+    private void update_expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_expenditureButtonActionPerformed
+        try {
+            if (update_responsibleComboBox.getSelectedItem() != null && update_expenditureReasonComboBox.getSelectedItem() != null
+                    && update_expenditureAmountTextField.getText() != null) {
+                String expenditure_id = update_expenditureIdLabel.getText();
+
+                String responsible_name = update_responsibleComboBox.getSelectedItem() + "";
+                object = responsibleController.searchResponsible("responsible_name", responsible_name);
+                String responsible_id = (String) object[0];
+
+                String expenditureReason_title = update_expenditureReasonComboBox.getSelectedItem() + "";
+                object = expenditureReasonController.searchExpenditureReason("expenditureReason_title", expenditureReason_title);
+                String expenditureReason_id = (String) object[0];
+
+                double expenditure_amount = Double.parseDouble(update_expenditureAmountTextField.getText());
+                String expenditure_date = simpleDateFormat.format(update_expenditureDateCalendar.getDate());
+
+                int result = expenditureController.updateExpenditure(expenditure_id, responsible_id, expenditureReason_id, expenditure_amount, expenditure_date);
+
+                if (result == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Expenditure updated successfully.");
+
+                    update_expenditureIdLabel.setText(null);
+                    update_expenditureAmountTextField.setText(null);
+
+                    loadComboInAddExpenditureTab();
+                    loadComboInSearchExpenditureTab();
+                    loadComboInUpdateExpenditureTab();
+                    loadComboInDeleteExpenditureTab();
+
+                    update_searchButton.doClick();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Expenditure updating failed. Please retry saving with corrrect details.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "None of the fields cannot be null. Please recheck before you update expenditure.");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_update_expenditureButtonActionPerformed
+
+    private void update_printExpenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_printExpenditureButtonActionPerformed
+        update_expenditureButton.doClick();
+    }//GEN-LAST:event_update_printExpenditureButtonActionPerformed
+
+    private void delete_dateCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_dateCheckBoxActionPerformed
+        delete_idCheckBox.setSelected(false);
+        delete_rangeOfDatesCheckBox.setSelected(false);
+
+        delete_date1Label.setEnabled(true);
+        delete_date1CalendarCombo.setEnabled(true);
+
+        delete_date2Label.setEnabled(false);
+        delete_date2CalendarCombo.setEnabled(false);
+
+        delete_idLabel.setEnabled(false);
+        delete_idComboBox.setEnabled(false);
+
+        if (!delete_dateCheckBox.isSelected()) {
+            delete_date1Label.setEnabled(false);
+            delete_date1CalendarCombo.setEnabled(false);
+        }
+    }//GEN-LAST:event_delete_dateCheckBoxActionPerformed
+
+    private void delete_rangeOfDatesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_rangeOfDatesCheckBoxActionPerformed
+        delete_idCheckBox.setSelected(false);
+        delete_dateCheckBox.setSelected(false);
+
+        delete_date1Label.setEnabled(true);
+        delete_date1CalendarCombo.setEnabled(true);
+
+        delete_date2Label.setEnabled(true);
+        delete_date2CalendarCombo.setEnabled(true);
+
+        delete_idLabel.setEnabled(false);
+        delete_idComboBox.setEnabled(false);
+
+        if (!delete_rangeOfDatesCheckBox.isSelected()) {
+            delete_date1Label.setEnabled(false);
+            delete_date1CalendarCombo.setEnabled(false);
+
+            delete_date2Label.setEnabled(false);
+            delete_date2CalendarCombo.setEnabled(false);
+        }
+    }//GEN-LAST:event_delete_rangeOfDatesCheckBoxActionPerformed
+
+    private void delete_reasonCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_reasonCheckBoxActionPerformed
+        delete_idCheckBox.setSelected(false);
+        delete_reasonLabel.setEnabled(true);
+        delete_reasonComboBox.setEnabled(true);
+
+        delete_idLabel.setEnabled(false);
+        delete_idComboBox.setEnabled(false);
+
+        if (!delete_reasonCheckBox.isSelected()) {
+            delete_reasonLabel.setEnabled(false);
+            delete_reasonComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_delete_reasonCheckBoxActionPerformed
+
+    private void delete_takerCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_takerCheckBoxActionPerformed
+        delete_idCheckBox.setSelected(false);
+        delete_takerLabel.setEnabled(true);
+        delete_takerComboBox.setEnabled(true);
+
+        delete_idLabel.setEnabled(false);
+        delete_idComboBox.setEnabled(false);
+
+        if (!delete_takerCheckBox.isSelected()) {
+            delete_takerLabel.setEnabled(false);
+            delete_takerComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_delete_takerCheckBoxActionPerformed
+
+    private void delete_amountCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_amountCheckBoxActionPerformed
+        delete_idCheckBox.setSelected(false);
+        delete_moreThanAmountCheckBox.setSelected(false);
+        delete_lessThanAmountCheckBox.setSelected(false);
+
+        delete_amountLabel.setEnabled(true);
+        delete_amountTextField.setEnabled(true);
+
+        delete_idLabel.setEnabled(false);
+        delete_idComboBox.setEnabled(false);
+
+        if (!delete_amountCheckBox.isSelected()) {
+            delete_amountLabel.setEnabled(false);
+            delete_amountTextField.setEnabled(false);
+        }
+    }//GEN-LAST:event_delete_amountCheckBoxActionPerformed
+
+    private void delete_moreThanAmountCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_moreThanAmountCheckBoxActionPerformed
+        delete_idCheckBox.setSelected(false);
+        delete_amountCheckBox.setSelected(false);
+        delete_lessThanAmountCheckBox.setSelected(false);
+
+        delete_amountLabel.setEnabled(true);
+        delete_amountTextField.setEnabled(true);
+
+        delete_idLabel.setEnabled(false);
+        delete_idComboBox.setEnabled(false);
+
+        if (!delete_moreThanAmountCheckBox.isSelected()) {
+            delete_amountLabel.setEnabled(false);
+            delete_amountTextField.setEnabled(false);
+        }
+    }//GEN-LAST:event_delete_moreThanAmountCheckBoxActionPerformed
+
+    private void delete_lessThanAmountCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_lessThanAmountCheckBoxActionPerformed
+        delete_idCheckBox.setSelected(false);
+        delete_amountCheckBox.setSelected(false);
+        delete_moreThanAmountCheckBox.setSelected(false);
+
+        delete_amountLabel.setEnabled(true);
+        delete_amountTextField.setEnabled(true);
+
+        delete_idLabel.setEnabled(false);
+        delete_idComboBox.setEnabled(false);
+
+        if (!delete_lessThanAmountCheckBox.isSelected()) {
+            delete_amountLabel.setEnabled(false);
+            delete_amountTextField.setEnabled(false);
+        }
+    }//GEN-LAST:event_delete_lessThanAmountCheckBoxActionPerformed
+
+    private void delete_idCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_idCheckBoxActionPerformed
+        delete_dateCheckBox.setSelected(false);
+        delete_rangeOfDatesCheckBox.setSelected(false);
+        delete_reasonCheckBox.setSelected(false);
+        delete_takerCheckBox.setSelected(false);
+        delete_amountCheckBox.setSelected(false);
+        delete_moreThanAmountCheckBox.setSelected(false);
+        delete_lessThanAmountCheckBox.setSelected(false);
+
+        delete_date1CalendarCombo.setEnabled(false);
+        delete_date2CalendarCombo.setEnabled(false);
+        delete_reasonComboBox.setEnabled(false);
+        delete_takerComboBox.setEnabled(false);
+        delete_amountTextField.setEnabled(false);
+        delete_date1Label.setEnabled(false);
+        delete_date2Label.setEnabled(false);
+        delete_reasonLabel.setEnabled(false);
+        delete_takerLabel.setEnabled(false);
+        delete_amountLabel.setEnabled(false);
+
+        delete_idLabel.setEnabled(true);
+        delete_idComboBox.setEnabled(true);
+
+        if (!delete_idCheckBox.isSelected()) {
+            delete_idLabel.setEnabled(false);
+            delete_idComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_delete_idCheckBoxActionPerformed
+
+    private void delete_searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_searchButtonActionPerformed
+        try {
+            if (delete_dateCheckBox.isSelected() || delete_rangeOfDatesCheckBox.isSelected()
+                    || delete_reasonCheckBox.isSelected() || delete_takerCheckBox.isSelected()
+                    || delete_amountCheckBox.isSelected() || delete_moreThanAmountCheckBox.isSelected()
+                    || delete_lessThanAmountCheckBox.isSelected() || delete_idCheckBox.isSelected()) {
+                String query = "SELECT * FROM expenditure ";
+                if (delete_idCheckBox.isSelected()) {
+                    String expenditure_id = delete_idComboBox.getSelectedItem() + "";
+                    query += "WHERE expenditure_id = '" + expenditure_id + "' ";
+
+                } else {
+                    query += "WHERE ";
+                    boolean useAnd = false;
+                    if (delete_dateCheckBox.isSelected()) {
+                        String expenditure_date = simpleDateFormat.format(delete_date1CalendarCombo.getDate());
+                        query += "expenditure_date ='" + expenditure_date + "' ";
+                        useAnd = true;
+
+                    } else if (delete_rangeOfDatesCheckBox.isSelected()) {
+                        String date1 = simpleDateFormat.format(delete_date1CalendarCombo.getDate());
+                        String date2 = simpleDateFormat.format(delete_date2CalendarCombo.getDate());
+
+                        query += "expenditure_date BETWEEN '" + date1 + "' AND '" + date2 + "' ";
+                        useAnd = true;
+                    }
+
+                    if (delete_reasonCheckBox.isSelected()) {
+                        String expenditure_reason = delete_reasonComboBox.getSelectedItem() + "";
+                        object = expenditureReasonController.searchExpenditureReason("expenditureReason_title", expenditure_reason);
+                        String expenditureReason_id = (String) object[0];
+
+                        if (useAnd) {
+                            query += "AND reasonforExpenditure_id ='" + expenditureReason_id + "' ";
+                        } else {
+                            query += "reasonforExpenditure_id ='" + expenditureReason_id + "' ";
+                        }
+                        useAnd = true;
+                    }
+
+                    if (delete_takerCheckBox.isSelected()) {
+                        String responsible_name = delete_takerComboBox.getSelectedItem() + "";
+                        object = responsibleController.searchResponsible("responsible_name", responsible_name);
+                        String responsible_id = (String) object[0];
+
+                        if (useAnd) {
+                            query += "AND responsibleForExpenditure_id ='" + responsible_id + "' ";
+                        } else {
+                            query += "responsibleForExpenditure_id ='" + responsible_id + "' ";
+                        }
+                        useAnd = true;
+                    }
+
+                    if (delete_amountCheckBox.isSelected()) {
+                        double expenditure_amount = Double.parseDouble(delete_amountTextField.getText());
+
+                        if (useAnd) {
+                            query += "AND expenditure_amount ='" + expenditure_amount + "' ";
+                        } else {
+                            query += "expenditure_amount ='" + expenditure_amount + "' ";
+                        }
+                    } else if (delete_moreThanAmountCheckBox.isSelected()) {
+                        double expenditure_amount = Double.parseDouble(delete_amountTextField.getText());
+
+                        if (useAnd) {
+                            query += "AND expenditure_amount >'" + expenditure_amount + "' ";
+                        } else {
+                            query += "expenditure_amount >'" + expenditure_amount + "' ";
+                        }
+                    } else if (delete_lessThanAmountCheckBox.isSelected()) {
+                        double expenditure_amount = Double.parseDouble(delete_amountTextField.getText());
+
+                        if (useAnd) {
+                            query += "AND expenditure_amount <'" + expenditure_amount + "' ";
+                        } else {
+                            query += "expenditure_amount <'" + expenditure_amount + "' ";
+                        }
+                    }
+                }
+
+                ArrayList<Object[]> arrayList = expenditureController.searchAllExpenditure(query);
+                dtmForDelete.setRowCount(0);
+
+                for (int i = 0; i < arrayList.size(); i++) {
+                    Object[] objectToFillTable = new Object[5];
+
+                    objectToFillTable[0] = arrayList.get(i)[0];
+
+                    object = responsibleController.searchResponsible("responsible_id", (String) arrayList.get(i)[1]);
+                    objectToFillTable[1] = object[1];
+
+                    object = expenditureReasonController.searchExpenditureReason("expenditureReason_id", (String) arrayList.get(i)[2]);
+                    objectToFillTable[2] = object[1];
+
+                    objectToFillTable[3] = arrayList.get(i)[3];
+                    objectToFillTable[4] = arrayList.get(i)[4];
+
+                    dtmForDelete.addRow(objectToFillTable);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Please select at least one filter to search exprnditure data");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_delete_searchButtonActionPerformed
+
+    private void delete_expenditureTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delete_expenditureTableMouseClicked
+        int selectedRow = delete_expenditureTable.getSelectedRow();
+        System.out.println(selectedRow);
+        delete_expenditureIdLabel.setText((String) dtmForDelete.getValueAt(selectedRow, 0));
+        delete_responsibleLabel.setText((String) dtmForDelete.getValueAt(selectedRow, 1));
+        delete_expenditureReasonLabel.setText((String) dtmForDelete.getValueAt(selectedRow, 2));
+        delete_expenditureAmountLabel.setText((String) dtmForDelete.getValueAt(selectedRow, 3));
+        delete_dateLabel.setText((String) dtmForDelete.getValueAt(selectedRow, 4));
+    }//GEN-LAST:event_delete_expenditureTableMouseClicked
+
+    private void delete_expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_expenditureButtonActionPerformed
+        try {
+            String expenditure_id = delete_expenditureIdLabel.getText();
+            int result = expenditureController.deleteExpenditure(expenditure_id);
+
+            if (result == 1) {
+                JOptionPane.showMessageDialog(rootPane, "Expenditure deleted successfully.");
+
+                delete_expenditureIdLabel.setText(null);
+                delete_responsibleLabel.setText(null);
+                delete_expenditureReasonLabel.setText(null);
+                delete_expenditureAmountLabel.setText(null);
+                delete_dateLabel.setText(null);
+
+                loadComboInAddExpenditureTab();
+                loadComboInSearchExpenditureTab();
+                loadComboInUpdateExpenditureTab();
+                loadComboInDeleteExpenditureTab();
+
+                add_expenditureIdLabel.setText(idGenerator.generateId("ee"));
+                delete_searchButton.doClick();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Unable to delete the selected expenditure.");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ManageExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_delete_expenditureButtonActionPerformed
+
+    public void loadComboInAddExpenditureTab() throws ClassNotFoundException, SQLException {
+        add_responsibleNameComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(add_responsibleNameComboBox, "responsible", "responsible_name");
+        comboSearch1.setSearchableCombo(add_responsibleNameComboBox, true, "No such responsible available");
+
+        add_expenditureReasonComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(add_expenditureReasonComboBox, "expenditureReason", "expenditureReason_title");
+        comboSearch2.setSearchableCombo(add_expenditureReasonComboBox, true, "No such expenditure reason available");
+    }
+
+    public void loadComboInSearchExpenditureTab() throws ClassNotFoundException, SQLException {
+        search_reasonComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(search_reasonComboBox, "expenditureReason", "expenditureReason_title");
+        comboSearch3.setSearchableCombo(search_reasonComboBox, true, "No such expenditure reason available");
+
+        search_takerComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(search_takerComboBox, "responsible", "responsible_name");
+        comboSearch4.setSearchableCombo(search_takerComboBox, true, "No such responsible available");
+
+        search_idComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(search_idComboBox, "expenditure", "expenditure_id");
+        comboSearch5.setSearchableCombo(search_idComboBox, true, "No such expenditure available");
+    }
+
+    public void loadComboInUpdateExpenditureTab() throws ClassNotFoundException, SQLException {
+        update_reasonComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(update_reasonComboBox, "expenditureReason", "expenditureReason_title");
+        comboSearch3.setSearchableCombo(update_reasonComboBox, true, "No such expenditure reason available");
+
+        update_takerComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(update_takerComboBox, "responsible", "responsible_name");
+        comboSearch4.setSearchableCombo(update_takerComboBox, true, "No such responsible available");
+
+        update_idComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(update_idComboBox, "expenditure", "expenditure_id");
+        comboSearch5.setSearchableCombo(update_idComboBox, true, "No such expenditure available");
+
+        update_responsibleComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(update_responsibleComboBox, "responsible", "responsible_name");
+        comboSearch4.setSearchableCombo(update_responsibleComboBox, true, "No such responsible available");
+
+        update_expenditureReasonComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(update_expenditureReasonComboBox, "expenditureReason", "expenditureReason_title");
+        comboSearch3.setSearchableCombo(update_expenditureReasonComboBox, true, "No such expenditure reason available");
+    }
+
+    public void loadComboInDeleteExpenditureTab() throws ClassNotFoundException, SQLException {
+        delete_reasonComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(delete_reasonComboBox, "expenditureReason", "expenditureReason_title");
+        comboSearch3.setSearchableCombo(delete_reasonComboBox, true, "No such expenditure reason available");
+
+        delete_takerComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(delete_takerComboBox, "responsible", "responsible_name");
+        comboSearch4.setSearchableCombo(delete_takerComboBox, true, "No such responsible available");
+
+        delete_idComboBox.removeAllItems();
+        comboBoxFunctions.loadCombo(delete_idComboBox, "expenditure", "expenditure_id");
+        comboSearch5.setSearchableCombo(delete_idComboBox, true, "No such expenditure available");
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ManageExpenditure.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ManageExpenditure.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ManageExpenditure.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ManageExpenditure.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ManageExpenditure().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField add_expenditureAmountTextField;
+    private org.freixas.jcalendar.JCalendar add_expenditureDateCalendar;
+    private javax.swing.JLabel add_expenditureIdLabel;
+    private javax.swing.JComboBox add_expenditureReasonComboBox;
+    private javax.swing.JButton add_newReasonForExpenditureButton;
+    private javax.swing.JButton add_newResponsibleButton;
+    private javax.swing.JComboBox add_responsibleNameComboBox;
+    private javax.swing.JButton add_saveExpenditureButton;
+    private javax.swing.JButton add_savePrintExpenditureButton;
+    private javax.swing.JCheckBox delete_amountCheckBox;
+    private javax.swing.JLabel delete_amountLabel;
+    private javax.swing.JTextField delete_amountTextField;
+    private org.freixas.jcalendar.JCalendarCombo delete_date1CalendarCombo;
+    private javax.swing.JLabel delete_date1Label;
+    private org.freixas.jcalendar.JCalendarCombo delete_date2CalendarCombo;
+    private javax.swing.JLabel delete_date2Label;
+    private javax.swing.JCheckBox delete_dateCheckBox;
+    private javax.swing.JLabel delete_dateLabel;
+    private javax.swing.JLabel delete_expenditureAmountLabel;
+    private javax.swing.JButton delete_expenditureButton;
+    private javax.swing.JLabel delete_expenditureIdLabel;
+    private javax.swing.JLabel delete_expenditureReasonLabel;
+    private javax.swing.JTable delete_expenditureTable;
+    private javax.swing.JCheckBox delete_idCheckBox;
+    private javax.swing.JComboBox delete_idComboBox;
+    private javax.swing.JLabel delete_idLabel;
+    private javax.swing.JCheckBox delete_lessThanAmountCheckBox;
+    private javax.swing.JCheckBox delete_moreThanAmountCheckBox;
+    private javax.swing.JCheckBox delete_rangeOfDatesCheckBox;
+    private javax.swing.JCheckBox delete_reasonCheckBox;
+    private javax.swing.JComboBox delete_reasonComboBox;
+    private javax.swing.JLabel delete_reasonLabel;
+    private javax.swing.JLabel delete_responsibleLabel;
+    private javax.swing.JButton delete_searchButton;
+    private javax.swing.JCheckBox delete_takerCheckBox;
+    private javax.swing.JComboBox delete_takerComboBox;
+    private javax.swing.JLabel delete_takerLabel;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
+    public javax.swing.JTabbedPane manageExpenditureTabbedPane;
+    private javax.swing.JCheckBox search_amountCheckBox;
+    private javax.swing.JLabel search_amountLabel;
+    private javax.swing.JTextField search_amountTextField;
+    private org.freixas.jcalendar.JCalendarCombo search_date1CalendarCombo;
+    private javax.swing.JLabel search_date1Label;
+    private org.freixas.jcalendar.JCalendarCombo search_date2CalendarCombo;
+    private javax.swing.JLabel search_date2Label;
+    private javax.swing.JCheckBox search_dateCheckBox;
+    private javax.swing.JTable search_expenditureTable;
+    private javax.swing.JCheckBox search_idCheckBox;
+    private javax.swing.JComboBox search_idComboBox;
+    private javax.swing.JLabel search_idLabel;
+    private javax.swing.JCheckBox search_lessThanAmountCheckBox;
+    private javax.swing.JCheckBox search_moreThanAmountCheckBox;
+    private javax.swing.JCheckBox search_rangeOfDatesCheckBox;
+    private javax.swing.JCheckBox search_reasonCheckBox;
+    private javax.swing.JComboBox search_reasonComboBox;
+    private javax.swing.JLabel search_reasonLabel;
+    private javax.swing.JButton search_searchButton;
+    private javax.swing.JCheckBox search_takerCheckBox;
+    private javax.swing.JComboBox search_takerComboBox;
+    private javax.swing.JLabel search_takerLabel;
+    private javax.swing.JButton update_addResponsibleButton;
+    private javax.swing.JCheckBox update_amountCheckBox;
+    private javax.swing.JLabel update_amountLabel;
+    private javax.swing.JTextField update_amountTextField;
+    private org.freixas.jcalendar.JCalendarCombo update_date1CalendarCombo;
+    private javax.swing.JLabel update_date1Label;
+    private org.freixas.jcalendar.JCalendarCombo update_date2CalendarCombo;
+    private javax.swing.JLabel update_date2Label;
+    private javax.swing.JCheckBox update_dateCheckBox;
+    private javax.swing.JTextField update_expenditureAmountTextField;
+    private javax.swing.JButton update_expenditureButton;
+    private org.freixas.jcalendar.JCalendar update_expenditureDateCalendar;
+    private javax.swing.JLabel update_expenditureIdLabel;
+    private javax.swing.JComboBox update_expenditureReasonComboBox;
+    private javax.swing.JTable update_expenditureTable;
+    private javax.swing.JCheckBox update_idCheckBox;
+    private javax.swing.JComboBox update_idComboBox;
+    private javax.swing.JLabel update_idLabel;
+    private javax.swing.JCheckBox update_lessThanAmountCheckBox;
+    private javax.swing.JCheckBox update_moreThanAmountCheckBox;
+    private javax.swing.JButton update_printExpenditureButton;
+    private javax.swing.JCheckBox update_rangeOfDatesCheckBox;
+    private javax.swing.JButton update_reasonButton;
+    private javax.swing.JCheckBox update_reasonCheckBox;
+    private javax.swing.JComboBox update_reasonComboBox;
+    private javax.swing.JLabel update_reasonLabel;
+    private javax.swing.JComboBox update_responsibleComboBox;
+    private javax.swing.JButton update_searchButton;
+    private javax.swing.JCheckBox update_takerCheckBox;
+    private javax.swing.JComboBox update_takerComboBox;
+    private javax.swing.JLabel update_takerLabel;
+    // End of variables declaration//GEN-END:variables
+}
